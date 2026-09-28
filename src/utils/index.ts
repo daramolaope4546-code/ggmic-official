@@ -1,0 +1,1 @@
+export { gridItemWidth, isTabletWidth } from './layout';

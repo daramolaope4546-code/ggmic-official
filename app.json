@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "GGMIC Official",
+    "slug": "ggmic-official",
+    "owner": "dojmedia",
+    "version": "1.0.0",
+    "orientation": "default",
+    "scheme": "ggmic",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "icon": "./assets/images/icon.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ggmic.official"
+    },
+    "android": {
+      "package": "com.ggmic.official",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#F1F5FB"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/images/ggmic-logo.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/ggmic-logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#F1F5FB"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8cdae75d-86c0-491d-a830-89a8013c0648"
+      }
+    }
+  }
+}
