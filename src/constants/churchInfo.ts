@@ -15,7 +15,8 @@ export const CHURCH_INFO: ChurchInformation = {
   founder: APP.founder,
   generalOverseer: APP.generalOverseer,
   mainLocation: APP.mainLocation,
-  history: 'Our church history will be added here.',
+  history:
+    'The official history of GGMIC will be added here once provided by the organisation.',
   mission: [
     'Ready to study and demostrate the word of God daily.',
     'Ready to rescue the Perishing Souls',
@@ -28,5 +29,6 @@ export const CHURCH_INFO: ChurchInformation = {
     'To raise leaders that will raise leaders in every sphere of life.',
     'To make heaven at last.',
   ],
-  motto: 'Our church motto will be added here.',
+  motto:
+    'The official motto of GGMIC will be added here once provided by the organisation.',
 };

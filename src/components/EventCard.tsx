@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { AppCard } from '@/components/AppCard';
+import { CardThumb } from '@/components/CardThumb';
 import { useResponsive } from '@/hooks/useResponsive';
 import { colors, fontSizes, fontWeights, radius, spacing } from '@/theme';
 import { formatDisplayDate } from '@/utils/dates';
 
+import type { ImageSourcePropType } from 'react-native';
 import type { ChurchEvent } from '@/types';
 
 interface EventCardProps {
@@ -13,24 +15,30 @@ interface EventCardProps {
   event?: ChurchEvent;
   placeholder?: boolean;
   onPress?: () => void;
+  /** Optional section artwork shown on the placeholder instead of the icon chip. */
+  image?: ImageSourcePropType;
 }
 
 /** Single event entry. Reusable for lists or the Home "Upcoming Event" slot. */
-export function EventCard({ event, placeholder = false, onPress }: EventCardProps) {
+export function EventCard({ event, placeholder = false, onPress, image }: EventCardProps) {
   const { sp } = useResponsive();
 
   if (placeholder || !event) {
     return (
       <AppCard accessibilityLabel="Upcoming events placeholder">
         <View style={[styles.row, { gap: sp(spacing.sm) }]}>
-          <View
-            style={[
-              styles.iconChip,
-              { width: sp(44), height: sp(44), borderRadius: sp(radius.pill) },
-            ]}
-          >
-            <MaterialIcons name="event-note" size={sp(22)} color={colors.textSecondary} />
-          </View>
+          {image ? (
+            <CardThumb image={image} />
+          ) : (
+            <View
+              style={[
+                styles.iconChip,
+                { width: sp(44), height: sp(44), borderRadius: sp(radius.pill) },
+              ]}
+            >
+              <MaterialIcons name="event-note" size={sp(22)} color={colors.textSecondary} />
+            </View>
+          )}
           <View style={styles.body}>
             <Text style={[styles.title, { fontSize: sp(fontSizes.body) }]}>
               Upcoming Event

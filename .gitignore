@@ -17,6 +17,12 @@ expo-env.d.ts
 *.mobileprovision
 __jb_tmp__/
 
+# Android / Google credentials
+credentials.json
+*.keystore
+google-services.json
+serviceAccount*.json
+
 # Metro
 .metro-health-check*
 

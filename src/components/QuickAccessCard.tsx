@@ -1,23 +1,30 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useResponsive } from '@/hooks/useResponsive';
-import { colors, fontSizes, fontWeights, minTouchTarget, radius, spacing } from '@/theme';
-
-import type { IconName } from '@/types';
+import {
+  colors,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  minTouchTarget,
+  radius,
+  shadows,
+  spacing,
+} from '@/theme';
 
 interface QuickAccessCardProps {
   label: string;
-  icon: IconName;
+  image: ImageSourcePropType;
   onPress: () => void;
   accessibilityLabel?: string;
 }
 
 /**
  * Tappable grid tile used in the Home Quick Access grid. Sized exclusively via
- * flex/width percentages so it adapts to any column count.
+ * flex/width percentages so it adapts to any column count. The illustration is
+ * a square PNG with a built-in soft chip, so no extra background is needed.
  */
-export function QuickAccessCard({ label, icon, onPress, accessibilityLabel }: QuickAccessCardProps) {
+export function QuickAccessCard({ label, image, onPress, accessibilityLabel }: QuickAccessCardProps) {
   const { sp } = useResponsive();
 
   return (
@@ -29,24 +36,29 @@ export function QuickAccessCard({ label, icon, onPress, accessibilityLabel }: Qu
         styles.card,
         {
           borderRadius: sp(radius.lg),
-          paddingVertical: sp(spacing.md),
+          paddingVertical: sp(spacing.sm),
         },
         pressed && styles.pressed,
       ]}
     >
-      <View
+      <Image
+        accessible={false}
+        accessibilityIgnoresInvertColors
+        source={image}
         style={[
-          styles.iconChip,
-          { width: sp(56), height: sp(56), borderRadius: sp(28) },
+          styles.image,
+          {
+            width: sp(48),
+            height: sp(48),
+            borderRadius: sp(radius.sm),
+          },
         ]}
-      >
-        <MaterialIcons name={icon} size={sp(26)} color={colors.primary} />
-      </View>
+      />
       <Text
         numberOfLines={2}
         style={[
           styles.label,
-          { fontSize: sp(fontSizes.small), lineHeight: sp(20) },
+          { fontSize: sp(fontSizes.caption), lineHeight: sp(lineHeights.caption) },
         ]}
       >
         {label}
@@ -57,21 +69,22 @@ export function QuickAccessCard({ label, icon, onPress, accessibilityLabel }: Qu
 
 const styles = StyleSheet.create({
   card: {
-    minHeight: minTouchTarget + spacing.md,
+    minHeight: minTouchTarget,
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.surface,
     paddingHorizontal: spacing.xs,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.border,
+    ...shadows.card,
   },
   pressed: {
     opacity: 0.85,
   },
-  iconChip: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primarySoft,
-    marginBottom: spacing.xs,
+  image: {
+    marginBottom: spacing.xxs,
+    resizeMode: 'contain',
   },
   label: {
     color: colors.textPrimary,

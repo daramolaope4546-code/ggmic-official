@@ -2,9 +2,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { AppCard } from '@/components/AppCard';
+import { CardThumb } from '@/components/CardThumb';
 import { useResponsive } from '@/hooks/useResponsive';
 import { colors, fontSizes, fontWeights, radius, spacing } from '@/theme';
 
+import type { ImageSourcePropType } from 'react-native';
 import type { Sermon } from '@/types';
 
 interface SermonCardProps {
@@ -12,10 +14,12 @@ interface SermonCardProps {
   sermon?: Sermon;
   placeholder?: boolean;
   onPress?: () => void;
+  /** Optional section artwork shown instead of the icon chip. */
+  image?: ImageSourcePropType;
 }
 
 /** Latest/featured sermon entry with a play affordance. */
-export function SermonCard({ sermon, placeholder = false, onPress }: SermonCardProps) {
+export function SermonCard({ sermon, placeholder = false, onPress, image }: SermonCardProps) {
   const { sp } = useResponsive();
   const hasSermon = !placeholder && sermon;
 
@@ -25,19 +29,23 @@ export function SermonCard({ sermon, placeholder = false, onPress }: SermonCardP
       accessibilityLabel={hasSermon ? sermon?.title : 'Latest sermon placeholder'}
     >
       <View style={[styles.row, { gap: sp(spacing.sm) }]}>
-        <View
-          style={[
-            styles.playChip,
-            { width: sp(52), height: sp(52), borderRadius: sp(26) },
-            hasSermon && styles.playChipActive,
-          ]}
-        >
-          <MaterialIcons
-            name={hasSermon ? 'play-arrow' : 'headset'}
-            size={sp(24)}
-            color={hasSermon ? colors.textOnPrimary : colors.textSecondary}
-          />
-        </View>
+        {image ? (
+          <CardThumb image={image} overlayIcon={hasSermon ? 'play-arrow' : undefined} />
+        ) : (
+          <View
+            style={[
+              styles.playChip,
+              { width: sp(52), height: sp(52), borderRadius: sp(26) },
+              hasSermon && styles.playChipActive,
+            ]}
+          >
+            <MaterialIcons
+              name={hasSermon ? 'play-arrow' : 'headset'}
+              size={sp(24)}
+              color={hasSermon ? colors.textOnPrimary : colors.textSecondary}
+            />
+          </View>
+        )}
         <View style={styles.body}>
           <Text style={[styles.title, { fontSize: sp(fontSizes.body) }]}>
             {hasSermon ? sermon!.title : 'Latest Sermon'}

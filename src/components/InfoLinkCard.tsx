@@ -2,15 +2,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { AppCard } from '@/components/AppCard';
+import { SectionThumb } from '@/components/SectionThumb';
 import { useResponsive } from '@/hooks/useResponsive';
 import { colors, fontSizes, fontWeights, minTouchTarget, spacing } from '@/theme';
 
+import type { ImageSourcePropType } from 'react-native';
 import type { IconName } from '@/types';
 
 interface InfoLinkCardProps {
   label: string;
   subtitle?: string;
   icon: IconName;
+  /** Local artwork for the section; the icon is used when absent. */
+  image?: ImageSourcePropType;
   onPress: () => void;
   accessibilityLabel?: string;
 }
@@ -23,6 +27,7 @@ export function InfoLinkCard({
   label,
   subtitle,
   icon,
+  image,
   onPress,
   accessibilityLabel,
 }: InfoLinkCardProps) {
@@ -31,14 +36,7 @@ export function InfoLinkCard({
   return (
     <AppCard onPress={onPress} accessibilityLabel={accessibilityLabel ?? label}>
       <View style={[styles.row, { gap: sp(spacing.sm) }]}>
-        <View
-          style={[
-            styles.iconChip,
-            { width: sp(44), height: sp(44), borderRadius: sp(22) },
-          ]}
-        >
-          <MaterialIcons name={icon} size={sp(22)} color={colors.primary} />
-        </View>
+        <SectionThumb icon={icon} image={image} />
         <View style={styles.titles}>
           <Text style={[styles.label, { fontSize: sp(fontSizes.body) }]}>{label}</Text>
           {subtitle ? (
@@ -58,11 +56,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     minHeight: minTouchTarget,
-  },
-  iconChip: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primarySoft,
   },
   titles: {
     flex: 1,

@@ -6,5 +6,12 @@ import { FOUNDER } from '@/constants/leaders';
  * placeholders until officially supplied.
  */
 export default function FounderScreen() {
-  return <LeaderProfile leader={FOUNDER} headerTitle="Founder" headerSubtitle="Pastor S.S. Bolarinwa" />;
+  return (
+    <LeaderProfile
+      leader={FOUNDER}
+      headerTitle="Founder"
+      headerSubtitle="Pastor S.S. Bolarinwa"
+      image={require('../../../assets/images/core-icons/founder.png')}
+    />
+  );
 }

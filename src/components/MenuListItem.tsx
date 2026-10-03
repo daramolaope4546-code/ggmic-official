@@ -1,20 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { SectionThumb } from '@/components/SectionThumb';
 import { useResponsive } from '@/hooks/useResponsive';
-import { colors, fontSizes, fontWeights, minTouchTarget, radius, spacing } from '@/theme';
+import { colors, fontSizes, fontWeights, minTouchTarget, spacing } from '@/theme';
 
+import type { ImageSourcePropType } from 'react-native';
 import type { IconName } from '@/types';
 
 interface MenuListItemProps {
   label: string;
   icon: IconName;
+  /** Local artwork for the section; the icon is used when absent. */
+  image?: ImageSourcePropType;
   onPress: () => void;
   accessibilityLabel?: string;
 }
 
 /** Single tappable row used by the Menu screen. */
-export function MenuListItem({ label, icon, onPress, accessibilityLabel }: MenuListItemProps) {
+export function MenuListItem({ label, icon, image, onPress, accessibilityLabel }: MenuListItemProps) {
   const { sp } = useResponsive();
 
   return (
@@ -28,14 +32,7 @@ export function MenuListItem({ label, icon, onPress, accessibilityLabel }: MenuL
         pressed && styles.pressed,
       ]}
     >
-      <View
-        style={[
-          styles.iconChip,
-          { width: sp(40), height: sp(40), borderRadius: sp(20) },
-        ]}
-      >
-        <MaterialIcons name={icon} size={sp(20)} color={colors.primary} />
-      </View>
+      <SectionThumb icon={icon} image={image} />
       <Text
         numberOfLines={1}
         style={[styles.label, { fontSize: sp(fontSizes.body) }]}
@@ -57,11 +54,6 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.6,
-  },
-  iconChip: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primarySoft,
   },
   label: {
     flex: 1,

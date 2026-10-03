@@ -9,8 +9,10 @@ import {
   FilterChip,
   ScreenContainer,
   SectionHeader,
+  SectionHero,
   SermonCard,
 } from '@/components';
+import { CORE_ART_RATIO } from '@/constants/assets';
 import { useResponsive } from '@/hooks/useResponsive';
 import {
   getFeaturedSermon,
@@ -35,6 +37,14 @@ export default function SermonsScreen() {
   return (
     <ScreenContainer scroll centered>
       <AppHeader title="Sermons" subtitle="Listen and be encouraged" />
+
+      <View style={{ marginTop: sp(spacing.xs) }}>
+        <SectionHero
+          aspectRatio={CORE_ART_RATIO}
+          image={require('../../../../assets/images/core-icons/sermons.png')}
+          maxWidth={150}
+        />
+      </View>
 
       <Pressable
         accessibilityLabel="Search sermons"
@@ -63,6 +73,7 @@ export default function SermonsScreen() {
           <SectionHeader title="Featured Sermon" />
           <SermonCard
             sermon={featured}
+            image={require('../../../../assets/images/core-icons/sermon.png')}
             onPress={() =>
               router.push({ pathname: '/sermons/detail', params: { id: featured.id } })
             }
@@ -109,6 +120,7 @@ export default function SermonsScreen() {
               <SermonCard
                 key={sermon.id}
                 sermon={sermon}
+                image={require('../../../../assets/images/core-icons/sermon.png')}
                 onPress={() =>
                   router.push({ pathname: '/sermons/detail', params: { id: sermon.id } })
                 }

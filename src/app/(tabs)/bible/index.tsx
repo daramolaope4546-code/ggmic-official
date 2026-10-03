@@ -10,7 +10,9 @@ import {
   EmptyState,
   ScreenContainer,
   SectionHeader,
+  SectionHero,
 } from '@/components';
+import { CORE_ART_RATIO } from '@/constants/assets';
 import { useResponsive } from '@/hooks/useResponsive';
 import {
   getBookmarks,
@@ -51,6 +53,14 @@ export default function BibleScreen() {
   return (
     <ScreenContainer scroll centered>
       <AppHeader title="Bible" subtitle="Read and study the Word" />
+
+      <View style={{ marginTop: sp(spacing.xs) }}>
+        <SectionHero
+          aspectRatio={CORE_ART_RATIO}
+          image={require('../../../../assets/images/core-icons/bible.png')}
+          maxWidth={150}
+        />
+      </View>
 
       <Pressable
         accessibilityLabel="Search the Bible"

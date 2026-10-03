@@ -8,7 +8,9 @@ import {
   EventCard,
   ScreenContainer,
   SectionHeader,
+  SectionHero,
 } from '@/components';
+import { CORE_ART_RATIO } from '@/constants/assets';
 import { useResponsive } from '@/hooks/useResponsive';
 import { getNextEvent, getUpcomingEvents, getPastEvents } from '@/services/events';
 import { colors, fontSizes, fontWeights, minTouchTarget, radius, spacing } from '@/theme';
@@ -29,6 +31,14 @@ export default function EventsScreen() {
   return (
     <ScreenContainer scroll centered>
       <AppHeader title="Events" subtitle="Gather with us" />
+
+      <View style={{ marginTop: sp(spacing.xs) }}>
+        <SectionHero
+          aspectRatio={CORE_ART_RATIO}
+          image={require('../../../../assets/images/core-icons/events.png')}
+          maxWidth={150}
+        />
+      </View>
 
       <Pressable
         accessibilityLabel="Search or filter events"

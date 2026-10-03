@@ -32,8 +32,9 @@ export default function MenuScreen() {
               {section.items.map((item) => (
                 <MenuListItem
                   key={item.id}
-                  label={item.label}
                   icon={item.icon}
+                  image={item.image}
+                  label={item.label}
                   onPress={() => router.push(item.route)}
                 />
               ))}

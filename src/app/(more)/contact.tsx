@@ -7,6 +7,7 @@ export default function ContactScreen() {
       title="Contact"
       subtitle={APP.mainLocation}
       icon="contact-phone"
+      image={require('../../../assets/images/menu/menu-contact.png')}
       message="Contact details and maps are coming soon."
       showBack
     />

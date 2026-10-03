@@ -1,13 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { AppCard, AppHeader, EmptyState, ScreenContainer, SectionHeader } from '@/components';
+import {
+  AppCard,
+  AppHeader,
+  EmptyState,
+  ScreenContainer,
+  SectionHeader,
+  SectionHero,
+} from '@/components';
+import { CORE_ART_RATIO } from '@/constants/assets';
 import { CHURCH_INFO } from '@/constants/churchInfo';
 import { useResponsive } from '@/hooks/useResponsive';
 import { colors, fontSizes, fontWeights, spacing } from '@/theme';
 
 /**
- * Our History. Placeholder content is used until the organisation supplies the
- * official history; the layout is ready for a formal timeline later.
+ * Our History. The official history is pending, so a professional placeholder
+ * explains that a timeline of GGMIC milestones will appear once the
+ * organisation provides it.
  */
 export default function HistoryScreen() {
   const { sp } = useResponsive();
@@ -17,6 +26,14 @@ export default function HistoryScreen() {
       <AppHeader title="Our History" subtitle="The story of GGMIC" showBack />
 
       <View style={{ marginTop: sp(spacing.xs) }}>
+        <SectionHero
+          aspectRatio={CORE_ART_RATIO}
+          image={require('../../../assets/images/core-icons/our-history.png')}
+          maxWidth={150}
+        />
+      </View>
+
+      <View style={{ marginTop: sp(spacing.lg) }}>
         <AppCard>
           <Text style={[styles.org, { fontSize: sp(fontSizes.title) }]}>
             {CHURCH_INFO.organisationName}
@@ -28,12 +45,14 @@ export default function HistoryScreen() {
       </View>
 
       <SectionHeader title="Our History" />
-      <EmptyState
-        compact
-        icon="history"
-        title="Our church history will be added here."
-        message="Once the official history is provided, a timeline of GGMIC milestones will appear here."
-      />
+      <AppCard>
+        <EmptyState
+          compact
+          icon="history"
+          title={CHURCH_INFO.history ?? 'Information coming soon.'}
+          message="A timeline of GGMIC milestones will be displayed here once the official history is provided."
+        />
+      </AppCard>
     </ScreenContainer>
   );
 }

@@ -11,6 +11,7 @@ export default function GeneralOverseerScreen() {
       leader={GENERAL_OVERSEER}
       headerTitle="General Overseer"
       headerSubtitle="Pastor Dr. O.S. Bolarinwa"
+      image={require('../../../assets/images/core-icons/general-overseer.png')}
     />
   );
 }

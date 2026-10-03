@@ -59,6 +59,22 @@ export function BranchCard({ branch }: BranchCardProps) {
             {branch.country}
           </Text>
         </View>
+        {branch.phone ? (
+          <View style={styles.line}>
+            <MaterialIcons name="phone" size={sp(18)} color={colors.primaryDark} />
+            <Text style={[styles.text, { fontSize: sp(fontSizes.body) }]}>
+              {branch.phone}
+            </Text>
+          </View>
+        ) : null}
+        {branch.email ? (
+          <View style={styles.line}>
+            <MaterialIcons name="email" size={sp(18)} color={colors.primaryDark} />
+            <Text style={[styles.text, { fontSize: sp(fontSizes.body) }]}>
+              {branch.email}
+            </Text>
+          </View>
+        ) : null}
       </View>
 
       <View style={[styles.mapRow, { marginTop: sp(spacing.md), gap: sp(spacing.xs) }]}>

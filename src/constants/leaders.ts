@@ -10,7 +10,7 @@ export const LEADERS: Leader[] = [
   {
     id: 'founder',
     name: 'Pastor S.S. Bolarinwa',
-    title: 'Founder / First General Overseer',
+    title: 'Founder / Late General Overseer',
     bioPreview: 'Biography coming soon.',
     route: '/founder',
   },
